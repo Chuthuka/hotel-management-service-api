@@ -4,7 +4,9 @@ import com.cpd.hotel_system.hotel_management_service_api.dto.request.RequestBran
 import com.cpd.hotel_system.hotel_management_service_api.dto.response.ResponseBranchDto;
 import com.cpd.hotel_system.hotel_management_service_api.dto.response.paginate.BranchPaginateResponseDto;
 import com.cpd.hotel_system.hotel_management_service_api.service.BranchService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BranchServiceImpl implements BranchService {
     @Override
     public void create(RequestBranchDto dto) {

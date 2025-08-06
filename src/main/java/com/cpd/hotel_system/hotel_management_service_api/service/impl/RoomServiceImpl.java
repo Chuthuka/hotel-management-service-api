@@ -4,7 +4,9 @@ import com.cpd.hotel_system.hotel_management_service_api.dto.request.RequestRoom
 import com.cpd.hotel_system.hotel_management_service_api.dto.response.ResponseRoomDto;
 import com.cpd.hotel_system.hotel_management_service_api.dto.response.paginate.RoomPaginateResponseDto;
 import com.cpd.hotel_system.hotel_management_service_api.service.RoomService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RoomServiceImpl implements RoomService {
     @Override
     public void create(RequestRoomDto dto) {
