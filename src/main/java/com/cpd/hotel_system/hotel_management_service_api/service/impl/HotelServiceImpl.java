@@ -6,6 +6,7 @@ import com.cpd.hotel_system.hotel_management_service_api.dto.response.ResponseHo
 import com.cpd.hotel_system.hotel_management_service_api.dto.response.paginate.HotelPaginateResponseDto;
 import com.cpd.hotel_system.hotel_management_service_api.entity.Branch;
 import com.cpd.hotel_system.hotel_management_service_api.entity.Hotel;
+import com.cpd.hotel_system.hotel_management_service_api.exception.EntryNotFoundException;
 import com.cpd.hotel_system.hotel_management_service_api.repository.HotelRepo;
 import com.cpd.hotel_system.hotel_management_service_api.service.HotelService;
 import com.cpd.hotel_system.hotel_management_service_api.util.ByteCodeHandler;
@@ -34,6 +35,17 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public void update(RequestHotelDto dto, String hotelId) {
+        Hotel SelectedHotel = hotelRepo.findById(hotelId).orElseThrow( ()-> new EntryNotFoundException("Hotel not found"));
+        SelectedHotel.setHotelName(dto.getHotelName());
+        SelectedHotel.setUpdatedAt(LocalDateTime.now());
+        try {
+            SelectedHotel.setDescription(byteCodeHandler.stringToBlob(dto.getDescription()));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        SelectedHotel.setStartingFrom(dto.getStartingFrom());
+        SelectedHotel.setStarRating(dto.getStarRating());
+        hotelRepo.save(SelectedHotel);
 
     }
 
